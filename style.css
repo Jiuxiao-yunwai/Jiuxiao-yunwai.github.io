@@ -1,0 +1,186 @@
+/* --- 全局样式 --- */
+
+/* --- 全局样式 --- */
+html {
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px; 
+}
+:root {
+    --primary-bg: #1a1a1a;
+    --secondary-bg: #2a2a2a;
+    --text-color: #e0e0e0;
+    --accent-color: #00aaff;
+    --border-color: #444;
+    --nav-height: 60px;
+}
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+    overflow: hidden; 
+}
+body.scrolled { /* (空) */ }
+
+/* --- 新增：导航栏样式 --- */
+/* --- 修改：导航栏样式 --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background-color: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 200;
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+/* 新增：导航栏内容容器 */
+.nav-content {
+    max-width: 1200px; /* 限制内容最大宽度 */
+    height: 100%;
+    margin: 0 auto; /* 水平居中 */
+    padding: 0 20px; /* 两侧留白 */
+    display: flex;
+    justify-content: space-between; /* 两端对齐 */
+    align-items: center; /* 垂直居中 */
+}
+/* 新增：左侧头像样式 */
+.nav-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    object-fit: cover;
+    display: block;
+}
+/* 修改：右侧链接列表 */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+/* 新增：当前激活链接的样式 */
+.nav-links a.active {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+
+/* --- 初始屏幕样式 (无变动) --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 300; /* hero 层级最高 */
+    transition: opacity 0.8s ease-in-out;
+    background-color: var(--primary-bg);
+}
+.hero-content { display: flex; flex-direction: column; align-items: center; }
+.avatar-container { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid var(--accent-color); box-shadow: 0 0 20px rgba(0, 170, 255, 0.5); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.avatar-container:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 170, 255, 0.8); }
+.avatar-container img { width: 100%; height: 100%; object-fit: cover; }
+.quote { margin-top: 2rem; font-size: 1.2rem; font-weight: 300; letter-spacing: 1px; color: #aaa; }
+
+
+/* --- 主内容区样式 (z-index 调整) --- */
+.main-content {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.8s ease-in-out;
+    position: relative; /* 添加相对定位 */
+    z-index: 100; /* main-content 层级最低 */
+}
+
+
+/* --- 交互后的状态切换 --- */
+body.scrolled .hero {
+    opacity: 0;
+    pointer-events: none;
+}
+body.scrolled .main-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+/* 新增：当进入主内容时，显示导航栏 */
+body.scrolled .navbar {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+
+/* --- 主内容区通用样式 (无变动) --- */
+.content-section { max-width: 900px; margin: 0 auto; padding: 60px 20px; border-bottom: 1px solid var(--border-color); }
+.content-section:first-child { padding-top: 80px; }
+.content-section:last-child { border-bottom: none; padding-bottom: 80px; }
+h2 { font-size: 2.5rem; text-align: center; margin-bottom: 40px; color: var(--accent-color); }
+h3 { font-size: 1.8rem; margin-bottom: 10px; }
+.about-container { display: flex; justify-content: center; align-items: center; }
+.about-text h4 { font-size: 1.2rem; color: #ccc; margin-bottom: 20px; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.skill-item p { margin-bottom: 8px; }
+.skill-bar { width: 100%; height: 10px; background-color: var(--secondary-bg); border-radius: 5px; }
+.skill-level { height: 100%; background-color: var(--accent-color); border-radius: 5px; }
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.portfolio-card { background-color: var(--secondary-bg); border-radius: 8px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.portfolio-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+.portfolio-card img { width: 100%; display: block; }
+.card-content { padding: 20px; }
+.card-content h3 { margin-top: 0; }
+.tags span { display: inline-block; background-color: var(--primary-bg); color: var(--accent-color); padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; margin-right: 8px; margin-top: 10px; }
+.timeline { list-style: none; padding: 0; position: relative; }
+.timeline:before { content: ''; position: absolute; top: 0; bottom: 0; left: 15px; width: 2px; background-color: var(--border-color); }
+.timeline-item { position: relative; padding-left: 50px; margin-bottom: 40px; }
+.timeline-item:before { content: ''; position: absolute; left: 8px; top: 5px; width: 16px; height: 16px; border-radius: 50%; background-color: var(--accent-color); border: 2px solid var(--primary-bg); }
+.timeline-content .date { color: #aaa; font-style: italic; }
+.timeline-content ul { padding-left: 20px; }
+#contact { text-align: center; }
+.email { font-size: 1.2rem; font-weight: bold; color: var(--accent-color); }
+.social-links a { color: var(--text-color); text-decoration: none; margin: 0 15px; font-size: 1.1rem; transition: color 0.3s ease; }
+.social-links a:hover { color: var(--accent-color); }
+
+/* --- 响应式设计 --- */
+@media (max-width: 768px) {
+    h2 { font-size: 2rem; }
+    .content-section { padding: 40px 15px; }
+    .navbar ul { gap: 5px; }
+    .navbar a { padding: 8px 10px; font-size: 0.9rem; }
+}
