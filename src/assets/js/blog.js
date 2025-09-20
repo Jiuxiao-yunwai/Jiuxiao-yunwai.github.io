@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 在这里列出你所有的博客文章文件名
+    // 【手动维护】在这里列出你所有的博客文章文件名
     const posts = [
-        'helloworld.md',
+        'hello-world.md',
         'another-post.md'
         // 每当你写一篇新文章，就在这里添加它的文件名
     ];
@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const sortedPosts = posts.slice().reverse();
 
         for (const postFile of sortedPosts) {
-            const res = await fetch(`../../posts/${postFile}`); 
+            // 这个路径现在对于本地和部署都有效
+            const res = await fetch(`../posts/${postFile}`); 
             const text = await res.text();
             const { frontMatter } = parseFrontMatter(text);
 
@@ -76,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const res = await fetch(`../../posts/${postFile}`);
+            // 这个路径现在对于本地和部署都有效
+            const res = await fetch(`../posts/${postFile}`);
             if (!res.ok) throw new Error('Network response was not ok');
             
             const text = await res.text();
@@ -100,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // 根据当前页面路径，决定执行哪个函数
+    // 初始化逻辑保持不变
     if (window.location.pathname.includes('blog.html')) {
         loadBlogList();
     } else if (window.location.pathname.includes('post.html')) {
