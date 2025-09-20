@@ -309,3 +309,98 @@ h3 { font-size: 1.8rem; margin-bottom: 10px; }
     .nav-links a { padding: 8px 10px; font-size: 0.9rem; }
     .nav-right { gap: 15px; }
 }
+
+/* --- 博客页面样式 (新增部分) --- */
+.blog-post-list {
+    list-style: none;
+    padding: 0;
+}
+
+.blog-post-item {
+    background-color: var(--secondary-bg);
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-post-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.blog-post-title {
+    margin: 0 0 10px 0;
+}
+
+.blog-post-title a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 1.8rem;
+}
+
+.blog-post-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary-color);
+    margin-bottom: 15px;
+}
+
+/* --- 单篇文章页面样式 --- */
+.post-header {
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+}
+.post-title {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+.post-meta {
+    font-size: 1rem;
+    color: var(--text-secondary-color);
+}
+
+.post-content {
+    line-height: 1.8;
+}
+.post-content h1, .post-content h2, .post-content h3 {
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-top: 40px;
+}
+.post-content p {
+    margin: 20px 0;
+}
+.post-content a {
+    color: var(--accent-color);
+}
+.post-content code {
+    background-color: var(--secondary-bg);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.post-content pre {
+    background-color: var(--secondary-bg);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+.post-content pre code {
+    background-color: transparent;
+    padding: 0;
+}
+.post-content blockquote {
+    border-left: 4px solid var(--accent-color);
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: var(--secondary-bg);
+    color: var(--text-secondary-color);
+}
+.post-content ul, .post-content ol {
+    padding-left: 30px;
+}
