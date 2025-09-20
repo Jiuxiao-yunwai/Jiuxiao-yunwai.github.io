@@ -7,8 +7,8 @@ html {
 
 :root {
     /* 默认是暗色主题 */
-    --primary-bg: #1a1a1a;
-    --secondary-bg: #2a2a2a;
+    --primary-bg: #222222;
+    --secondary-bg: #333333;
     --text-color: #e0e0e0;
     --text-secondary-color: #aaa;
     --accent-color: #00aaff;
@@ -20,7 +20,7 @@ html {
 
 body.light-mode {
     /* 亮色主题的颜色变量 */
-    --primary-bg: #f4f4f5;
+    --primary-bg: #eeeeee;
     --secondary-bg: #ffffff;
     --text-color: #27272a;
     --text-secondary-color: #71717a;
