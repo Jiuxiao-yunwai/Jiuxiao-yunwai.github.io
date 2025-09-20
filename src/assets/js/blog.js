@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 【手动维护】在这里列出你所有的博客文章文件名
     const posts = [
-        'hello-world.md',
-        'another-post.md'
+        'helloworld.md',
+        // 'another-post.md'
         // 每当你写一篇新文章，就在这里添加它的文件名
     ];
 
