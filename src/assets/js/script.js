@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.add('scrolled');
             contentIsVisible = true;
             scrollUpCounter = 0;
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 0); 
             
             setTimeout(() => {
                 body.style.overflowY = 'auto';
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSectionId}`) {
+            if (link.getAttribute('href').endsWith(`#${currentSectionId}`)) {
                 link.classList.add('active');
             }
         });
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 初始化和事件监听
     // ==========================================================
 
-    // 1. 初始化主题：页面加载时立即检查localStorage
+    // 1. 初始化主题
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         themeToggle.checked = true;
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         switchTheme(false);
     }
     
-    // 2. 监听主题切换开关的 'change' 事件
+    // 2. 监听主题切换
     themeToggle.addEventListener('change', () => {
         switchTheme(themeToggle.checked);
     });
@@ -113,4 +113,32 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('wheel', handleWheelScroll);
     window.addEventListener('scroll', highlightNavOnScroll);
 
+    // 4. 检查 URL hash (用于从其他页面跳转)
+    if (window.location.hash) {
+        body.classList.add('scrolled');
+        contentIsVisible = true;
+        body.style.overflowY = 'auto';
+        highlightNavOnScroll();
+    }
+
+    // 5. 【新增功能】监听导航栏头像点击，返回英雄页
+    const navAvatarLink = document.querySelector('.nav-avatar-link');
+    if (navAvatarLink) {
+        navAvatarLink.addEventListener('click', (event) => {
+            const isIndexPage = window.location.pathname.endsWith('/') || window.location.pathname.endsWith('index.html');
+
+            // 如果当前已在主页，并且主内容区是可见的
+            if (isIndexPage && contentIsVisible) {
+                // 阻止链接的默认跳转行为
+                event.preventDefault();
+                
+                // 手动触发返回英雄页的逻辑
+                body.classList.remove('scrolled');
+                contentIsVisible = false;
+                scrollUpCounter = 0;
+                body.style.overflowY = 'hidden';
+            }
+            // 如果不在主页，则不执行任何特殊操作，让链接正常跳转到 index.html
+        });
+    }
 });
